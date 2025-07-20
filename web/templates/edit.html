@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Editar VLAN</title>
+    <meta charset="utf-8">
+    <!-- Adicione as linhas abaixo para incluir o Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+         .footer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1 class="mt-4">Editar VLAN</h1>
+
+    <form action="{{ url_for('edit', id=vlan.id) }}" method="POST">
+        <div class="form-group">
+            <label for="vlan_id">Id da VLAN:</label>
+            <input type="text" class="form-control" id="vlan_id" name="vlan_id" value="{{ vlan.vlan_id }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="port_number">Porta do switch:</label>
+            <input type="text" class="form-control" id="port_number" name="port_number" value="{{ vlan.port_number }}" required>
+        </div>
+
+        <div class="clearfix"></div>
+        <div style="margin-top: 20px;"></div>
+        
+        <div class="form-group">
+            <!-- Add some space here -->
+        </div>
+        
+        <button type="submit" class="btn btn-primary float-left">Salvar</button>
+        <a href="{{ url_for('index') }}" class="btn btn-link float-right">Voltar</a>
+    </form>
+</div>
+<div class="footer">
+    <p>Controle de fluxo de dados utilizando redes locais virtuais
+        em uma rede definida por software - TCC - 2024</p>
+</div>
+</body>
+</html>

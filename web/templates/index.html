@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>TCC - SDN</title>
+    <meta charset="utf-8">
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin-top: 20px;
+        }
+        .vlan-list {
+            margin-bottom: 20px;
+        }
+        .footer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Gerenciar VLANs</h1>
+
+    <form action="/" method="POST">
+        <div class="form-group">
+            <label for="vlan_id">Id da VLAN:</label>
+            <input type="text" class="form-control" id="vlan_id" name="vlan_id" required>
+        </div>
+
+        <div class="form-group">
+            <label for="port_number">Porta do switch:</label>
+            <input type="text" class="form-control" id="port_number" name="port_number" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+    <br>
+    <br>
+    <h2>Lista de VLANs</h2>
+
+    <table class="table vlan-list">
+        <thead>
+            <tr>
+                <th>VLAN ID</th>
+                <th>Porta do Switch</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vlan in vlans %}
+            <tr>
+                <td>{{ vlan.vlan_id }}</td>
+                <td>{{ vlan.port_number }}</td>
+                <td>
+                    <a href="{{ url_for('edit', id=vlan.id) }}" class="btn btn-primary">Editar</a>
+                    <a href="{{ url_for('delete', id=vlan.id) }}" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir?');">Excluir</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="3">Nenhum dado disponível.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+<div class="footer">
+    <p>Controle de fluxo de dados utilizando redes locais virtuais
+        em uma rede definida por software - TCC - 2024</p>
+</div>
+
+<!-- Add Bootstrap JavaScript -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
